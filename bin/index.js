@@ -9,9 +9,8 @@ const actionState = require('../lib/models/actionState.js');
 const start = async () => {
   let currentPrompt = 1;
   while (currentPrompt) {
-    
     const response = await Prompt.getById(currentPrompt);
-    
+
     const answers = await inquirer.prompt({
       prefix: '*',
       type: 'list',
@@ -25,17 +24,17 @@ const start = async () => {
     const chosenAction = response.actions.find((action) => {
       return action.id === answers[`prompt ${response.id}`];
     });
-    // set current action to false
-    // 
-    
-    currentPrompt = chosenAction.next_prompt_id;
-    
-  
+    const state = await actionState.checkActionState(chosenAction.id);
+
+    if (state.actionCount === 0 || state.actionCount === state.stateCount) {
+      currentPrompt = chosenAction.next_prompt_id;
+    } else {
+      console.log(
+        'Hmm, you can`t seem to do that yet. Maybe turn back and check around more?? :)'
+      );
+    }
+
     console.log(currentPrompt);
-
   }
-
 };
 start();
-
-
