@@ -89,11 +89,11 @@ VALUES
   (8, 'Go back', 3, null),
   (9, 'Pick up pipe', 3, 3),
   (9, 'Go back', 3, null),
-  (6, 'Play Again', 1, null),
+  (6, 'Play Again', 0, null),
   (10, 'Next', 4, null),
   (11, 'Next', 13, null),
   (13, 'Next', 4, null),
-  (12, 'Play Again', 1, null);
+  (12, 'Play Again', 0, null);
 
 CREATE TABLE action_state (
   action_id BIGINT,
