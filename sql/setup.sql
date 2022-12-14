@@ -115,9 +115,3 @@ CREATE TABLE user_state (
   FOREIGN KEY (user_id) REFERENCES users(id),
   FOREIGN KEY (state_id) REFERENCES state(id)
 );
-
-INSERT INTO 
-  user_state (user_id, state_id)
-VALUES
-  (1, 1);
-
