@@ -40,8 +40,8 @@ VALUES
   ('A large pipe, this could be useful later!'),
   ('The control panel sparks, it seems to have some power'),
   ('ALERT! Oxygen levels are running low, proceed to the next room to assess the damage.'),
-  ('You have succesfully restored the ship to habitable conditions, consider your duties complete. YOU WON!'),
-  ('GAME OVER! YOU DEAD!');
+  ('You have succesfully accessed the room with the oxygen generator. You fix it, restoring the ship to habitable conditions, consider your duties complete. YOU WON!'),
+  ('It sounds like the oxygen stabilizer is damaged in the next room, I should look around in case it needs fixing.');
   
 CREATE TABLE state (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -88,7 +88,12 @@ VALUES
   (8, 'Pick up key card', 3, 2),
   (8, 'Go back', 3, null),
   (9, 'Pick up pipe', 3, 3),
-  (9, 'Go back', 3, null);
+  (9, 'Go back', 3, null),
+  (6, 'Play Again', 1, null),
+  (10, 'Next', 4, null),
+  (11, 'Next', 13, null),
+  (13, 'Next', 4, null),
+  (12, 'Play Again', 1, null);
 
 CREATE TABLE action_state (
   action_id BIGINT,
