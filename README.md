@@ -1,27 +1,32 @@
-# Template for Backend Express
+# Intergalactic Space Escape
 
-The Golden Rule:
-🦸 🦸‍♂️ Stop starting and start finishing. 🏁
+## Description
+The Intergalactic Space Escape is an escape room game. As a player you have traveled into space in search of (something)... The ship has been badly hit by (something)... You get knocked out only to wake up to having to fight for your life.
 
-If you work on more than one feature at a time, you are guaranteed to multiply your bugs and your anxiety.
+# Install
+npm i 
 
-## Scripts
+## Terminal Command 
+npx
 
-| command                | description                                                                         |
-| ---------------------- | ----------------------------------------------------------------------------------- |
-| `npm start`            | starts the app - should only be used in production as changes will not get reloaded |
-| `npm run start:watch`  | runs the app using `nodemon` which watches for changes and reloads the app          |
-| `npm test`             | runs the tests once                                                                 |
-| `npm run test:watch`   | continually watches and runs the tests when files are updated                       |
-| `npm run setup-db`     | sets up the database locally                                                        |
-| `npm run setup-heroku` | sets up the database on heroku                                                      |
+## About The Project
+This project was developed by using express and inquirer. Express was used to to create our database. The database stores the actions a player can make, along with what the player can use to move along in their escape from space. It also provides the prompts for the player so they can make choices and directs the player to the next prompt based on the choice they make for their survival.
 
-## User Routes
+## Meet The Team
 
-| Route                    | HTTP Method | HTTP Body                                                                              | Description                                        |
-| ------------------------ | ----------- | -------------------------------------------------------------------------------------- | -------------------------------------------------- |
-| `/api/v1/users/`         | `POST`      | `{email: 'example@test.com', password: '123456', firstName: 'Test', lastName: 'User'}` | Creates new user                                   |
-| `api/v1/users/sessions/` | `POST`      | `{email: 'example@test.com', password: '123456'}`                                      | Signs in existing user                             |
-| `/api/v1/users/me/`      | `GET`       | None                                                                                   | Returns current user                               |
-| `/api/v1/users/`         | `GET`       | None                                                                                   | Authorized endpoint - returns all users for admin. |
-| `api/v1/users/sessions/` | `DELETE`    | None                                                                                   | Deletes a user session                             |
+### | Erik Baxstrom |
+GitHub: https://github.com/erikbaxstrom
+
+LinkedIn: https://www.linkedin.com/in/erik-baxstrom/
+### | Eddie Kuo |
+GitHub: https://github.com/Eddie-Kuo
+
+LinkedIn: https://www.linkedin.com/in/eddie-kuo17/
+### | Emily Pisaygnane |
+GitHub || https://github.com/emilypisaygnane
+
+LinkedIn: https://www.linkedin.com/in/emily-pisaygnane/
+### | Tanner Richards |
+GitHub: https://github.com/TannerRichards990
+
+LinkedIn: https://www.linkedin.com/in/tannerrichards/
