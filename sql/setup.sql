@@ -4,8 +4,9 @@ DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS prompts CASCADE;
 DROP TABLE IF EXISTS actions CASCADE;
 DROP TABLE IF EXISTS state CASCADE;
-DROP TABLE IF EXISTS action_state;
-DROP TABLE IF EXISTS user_state;
+DROP TABLE IF EXISTS action_state CASCADE;
+DROP TABLE IF EXISTS user_state CASCADE;
+
 
 CREATE TABLE users (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -39,34 +40,9 @@ VALUES
   ('A large pipe, this could be useful later!'),
   ('The control panel sparks, it seems to have some power'),
   ('ALERT! Oxygen levels are running low, proceed to the next room to assess the damage.'),
-  ('You have succesfully restored the ship to habitable conditions, consider your duties complete. YOU WON!');
+  ('You have succesfully accessed the room with the oxygen generator. You fix it, restoring the ship to habitable conditions, consider your duties complete. YOU WON!'),
+  ('It sounds like the oxygen stabilizer is damaged in the next room, I should look around in case it needs fixing.');
   
-
-CREATE TABLE actions (
-  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  prompt_id BIGINT,
-  description VARCHAR NOT NULL,
-  next_prompt_id BIGINT
-);
-
-INSERT INTO 
-  actions (prompt_id, description, next_prompt_id)
-VALUES
-  (1, 'Examine Window', 2),
-  (1, 'Examine Desk', 3),
-  (1, 'Examine Control Panel', 4),
-  (1, 'Examine Door', 5),
-  (2, 'Examine Crack', 6),
-  (3, 'Examine Milk', 7),
-  (3, 'Examine Key Card', 8),
-  (3, 'Examine Pipe', 9),
-  (4, 'Pour milk on Control Panel', 10),
-  (4, 'Push Big Red Button', 11),
-  (5, 'Use Key Card', 12),
-  (7, 'Pick up Milk', 3),
-  (8, 'Pick up Key Card', 3),
-  (9, 'Pick up Pipe', 3);
-
 CREATE TABLE state (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   description VARCHAR NOT NULL
@@ -80,6 +56,45 @@ VALUES
   ('Pipe'),
   ('Power Is On');
 
+CREATE TABLE actions (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  prompt_id BIGINT,
+  description VARCHAR NOT NULL,
+  next_prompt_id BIGINT,
+  state_id BIGINT,
+  FOREIGN KEY (state_id) REFERENCES state(id)
+);
+
+INSERT INTO 
+  actions (prompt_id, description, next_prompt_id, state_id)
+VALUES
+  (1, 'Examine window', 2, null),
+  (1, 'Examine desk', 3, null),
+  (1, 'Examine control panel', 4, null),
+  (1, 'Examine door', 5, null),
+  (2, 'Examine crack', 6, null),
+  (2, 'Go back', 1, null),
+  (3, 'Examine milk', 7, null),
+  (3, 'Examine key card', 8, null),
+  (3, 'Examine pipe', 9, null),
+  (3, 'Go back', 1, null),
+  (4, 'Pour milk on control panel', 10, null),
+  (4, 'Push big red button', 11, 4),
+  (4, 'Go back', 1, null),
+  (5, 'Use key card', 12, null),
+  (5, 'Go back', 1, null),
+  (7, 'Pick up milk', 3, 1),
+  (7, 'Go back', 3, null),
+  (8, 'Pick up key card', 3, 2),
+  (8, 'Go back', 3, null),
+  (9, 'Pick up pipe', 3, 3),
+  (9, 'Go back', 3, null),
+  (6, 'Play Again', 1, null),
+  (10, 'Next', 4, null),
+  (11, 'Next', 13, null),
+  (13, 'Next', 4, null),
+  (12, 'Play Again', 1, null);
+
 CREATE TABLE action_state (
   action_id BIGINT,
   state_id BIGINT,
@@ -91,14 +106,8 @@ CREATE TABLE action_state (
 INSERT INTO 
   action_state (action_id, state_id, default_display)
 VALUES
-  (6, 1, TRUE),
-  (7, 2, TRUE),
-  (8, 3, TRUE),
-  (10, 4, TRUE),
-  (11, 2, FALSE),
-  (12, 1, TRUE),
-  (13, 2, TRUE),
-  (14, 3, TRUE);
+  (11, 1, TRUE),
+  (14, 2, TRUE);
 
 CREATE TABLE user_state (
   user_id BIGINT,
