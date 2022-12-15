@@ -12,6 +12,7 @@ const {
 const start = async () => {
   let currentPrompt = 0;
   let deathCount = 0;
+  let displayMessage = '';
   console.clear();
   console.log(
     'The Intergalactic Space Escape is an escape room game. As a player you have traveled into space in search of (something)... The ship has been badly hit by (something)... You get knocked out only to wake up to having to fight for your life.'
@@ -19,7 +20,7 @@ const start = async () => {
   while (currentPrompt >= 0) {
     if (currentPrompt === 0) {
       await deleteState();
-
+      if (deathCount > 0) console.log(`You have died ${deathCount} times.`);
       currentPrompt = 1;
     }
     const response = await fetchPromptById(currentPrompt);
@@ -40,11 +41,13 @@ const start = async () => {
     const state = await fetchStateByAction(chosenAction.id);
 
     if (state.actionCount === 0 || state.actionCount === state.stateCount) {
+      displayMessage = '';
       // Check if the chosen action has a state ID and insert it into the user_state table if not already present
       if (chosenAction.state_id !== null) {
         // Check if the item is already in the user's inventory
         if (await fetchUserState(chosenAction.state_id)) {
-          console.log('You already have this item in your inventory!!');
+          displayMessage = 'You already have this item in your inventory!!';
+          // console.log('You already have this item in your inventory!!');
         } else {
           // Insert the item into the user's inventory
           insertState(chosenAction.state_id);
@@ -52,15 +55,20 @@ const start = async () => {
       }
       currentPrompt = chosenAction.next_prompt_id;
     } else {
-      console.log(
-        'Hmm, you can`t seem to do that yet. Maybe turn back and check around more?? :)'
-      );
+      // console.log(
+      //   'Hmm, you can`t seem to do that yet. Maybe turn back and check around more?? :)'
+      // );
+      displayMessage =
+        'Hmm, you can`t seem to do that yet. Maybe turn back and check around more?? :)';
     }
     if (currentPrompt === 0) {
       deathCount++;
-      console.log(`You have died ${deathCount} times.`);
     }
     console.clear();
+    console.log(displayMessage);
   }
+  console.log('Thank you for playing!');
+  console.log(`You died ${deathCount} times.`);
+  console.log('about the developers...');
 };
 start();

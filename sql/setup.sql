@@ -90,7 +90,8 @@ VALUES
   (10, 'Next', 4, null),
   (11, 'Next', 13, null),
   (13, 'Next', 4, null),
-  (12, 'Play Again', 0, null);
+  (12, 'Exit', -1, null);
+
 
 CREATE TABLE action_state (
   action_id BIGINT,
