@@ -61,6 +61,7 @@ const userState = require('../lib/models/userState.js');
 const {
   fetchPromptById,
   fetchStateByAction,
+  insertState,
 } = require('../lib/utils/fetch-utils.js');
 
 const start = async () => {
@@ -96,7 +97,7 @@ const start = async () => {
           console.log('You already have this item in your inventory!!');
         } else {
           // Insert the item into the user's inventory
-          userState.insert(chosenAction.state_id);
+          insertState(chosenAction.state_id);
         }
       }
       currentPrompt = chosenAction.next_prompt_id;

@@ -98,4 +98,17 @@ describe('user routes', () => {
     const resp = await agent.delete('/api/v1/users/sessions');
     expect(resp.status).toBe(204);
   });
+
+  it('POST /users/state should add new state for a user', async () => {
+    const resp = await request(app).post('/api/v1/users/state').send({
+      actionStateId: 1,
+    });
+    expect(resp.status).toBe(200);
+    expect(resp.body).toMatchInlineSnapshot(`
+      Object {
+        "stateId": "1",
+        "userId": "1",
+      }
+    `);
+  });
 });
