@@ -6,9 +6,7 @@ const UserService = require('../lib/services/UserService');
 
 // Dummy user for testing
 const mockUser = {
-  firstName: 'Test',
-  lastName: 'User',
-  email: 'test@example.com',
+  username: 'exampleUser',
   password: '12345',
 };
 
@@ -23,8 +21,8 @@ const registerAndLogin = async (userProps = {}) => {
   const user = await UserService.create({ ...mockUser, ...userProps });
 
   // ...then sign in
-  const { email } = user;
-  await agent.post('/api/v1/users/sessions').send({ email, password });
+  const { username } = user;
+  await agent.post('/api/v1/users/sessions').send({ username, password });
   return [agent, user];
 };
 
@@ -38,13 +36,11 @@ describe('user routes', () => {
 
   it('creates a new user', async () => {
     const res = await request(app).post('/api/v1/users').send(mockUser);
-    const { firstName, lastName, email } = mockUser;
+    const { username } = mockUser;
 
     expect(res.body).toEqual({
       id: expect.any(String),
-      firstName,
-      lastName,
-      email,
+      username,
     });
   });
 
@@ -52,7 +48,7 @@ describe('user routes', () => {
     await request(app).post('/api/v1/users').send(mockUser);
     const res = await request(app)
       .post('/api/v1/users/sessions')
-      .send({ email: 'test@example.com', password: '12345' });
+      .send({ username: 'exampleUser', password: '12345' });
     expect(res.status).toEqual(200);
   });
 
@@ -78,23 +74,21 @@ describe('user routes', () => {
 
     // create a new user
     await agent.post('/api/v1/users').send({
-      email: 'admin',
+      username: 'admin',
       password: '1234',
-      firstName: 'admin',
-      lastName: 'admin',
     });
     // sign in the user
     await agent
       .post('/api/v1/users/sessions')
-      .send({ email: 'admin', password: '1234' });
+      .send({ username: 'admin', password: '1234' });
 
-    // const [agent] = await registerAndLogin({ email: 'admin' });
+    // const [agent] = await registerAndLogin({ username: 'admin' });
     const res = await agent.get('/api/v1/users/');
     expect(res.status).toEqual(200);
   });
 
   it('/users should return a 200 if user is admin', async () => {
-    const [agent] = await registerAndLogin({ email: 'admin' });
+    const [agent] = await registerAndLogin({ username: 'admin' });
     const res = await agent.get('/api/v1/users/');
     expect(res.status).toEqual(200);
   });
@@ -103,5 +97,44 @@ describe('user routes', () => {
     const [agent] = await registerAndLogin();
     const resp = await agent.delete('/api/v1/users/sessions');
     expect(resp.status).toBe(204);
+  });
+
+  it('POST /users/state should add new state for a user', async () => {
+    const resp = await request(app).post('/api/v1/users/state').send({
+      actionStateId: 1,
+    });
+    expect(resp.status).toBe(200);
+    expect(resp.body).toMatchInlineSnapshot(`
+      Object {
+        "stateId": "1",
+        "userId": "1",
+      }
+    `);
+  });
+
+  it('DELETE /users/state should delete all user state', async () => {
+    const stateResp = await request(app).post('/api/v1/users/state').send({
+      actionStateId: 1,
+    });
+    expect(stateResp.status).toBe(200);
+    const resp = await request(app).delete('/api/v1/users/state');
+    expect(resp.status).toBe(204);
+    const countResp = await request(app).get('/api/v1/actions/1/state');
+    expect(countResp.body.stateCount).toEqual('0');
+  });
+
+  it('GET /user/state/:id should return user state by id', async () => {
+    const stateResp = await request(app).post('/api/v1/users/state').send({
+      actionStateId: 1,
+    });
+    expect(stateResp.status).toBe(200);
+    const response = await request(app).get('/api/v1/users/state/1');
+    expect(response.status).toBe(200);
+    expect(response.body).toMatchInlineSnapshot(`
+      Object {
+        "state_id": "1",
+        "user_id": "1",
+      }
+    `);
   });
 });

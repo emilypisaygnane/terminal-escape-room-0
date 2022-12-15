@@ -10,16 +10,14 @@ DROP TABLE IF EXISTS user_state CASCADE;
 
 CREATE TABLE users (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  email VARCHAR,
-  password_hash VARCHAR NOT NULL,
-  first_name VARCHAR NOT NULL,
-  last_name VARCHAR NOT NULL
+  username VARCHAR,
+  password_hash VARCHAR NOT NULL
 );
 
 INSERT INTO 
-  users (email, password_hash, first_name, last_name)
+  users (username, password_hash)
 VALUES
-  ('default', 'default', 'default', 'default');
+  ('default', 'default');
 
 CREATE TABLE prompts (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -89,11 +87,11 @@ VALUES
   (8, 'Go back', 3, null),
   (9, 'Pick up pipe', 3, 3),
   (9, 'Go back', 3, null),
-  (6, 'Play Again', 1, null),
+  (6, 'Play Again', 0, null),
   (10, 'Next', 4, null),
   (11, 'Next', 13, null),
   (13, 'Next', 4, null),
-  (12, 'Play Again', 1, null);
+  (12, 'Play Again', 0, null);
 
 CREATE TABLE action_state (
   action_id BIGINT,
@@ -115,9 +113,3 @@ CREATE TABLE user_state (
   FOREIGN KEY (user_id) REFERENCES users(id),
   FOREIGN KEY (state_id) REFERENCES state(id)
 );
-
-INSERT INTO 
-  user_state (user_id, state_id)
-VALUES
-  (1, 1);
-
