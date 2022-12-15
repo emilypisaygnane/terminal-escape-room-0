@@ -111,4 +111,30 @@ describe('user routes', () => {
       }
     `);
   });
+
+  it('DELETE /users/state should delete all user state', async () => {
+    const stateResp = await request(app).post('/api/v1/users/state').send({
+      actionStateId: 1,
+    });
+    expect(stateResp.status).toBe(200);
+    const resp = await request(app).delete('/api/v1/users/state');
+    expect(resp.status).toBe(204);
+    const countResp = await request(app).get('/api/v1/actions/1/state');
+    expect(countResp.body.stateCount).toEqual('0');
+  });
+
+  it('GET /user/state/:id should return user state by id', async () => {
+    const stateResp = await request(app).post('/api/v1/users/state').send({
+      actionStateId: 1,
+    });
+    expect(stateResp.status).toBe(200);
+    const response = await request(app).get('/api/v1/users/state/1');
+    expect(response.status).toBe(200);
+    expect(response.body).toMatchInlineSnapshot(`
+      Object {
+        "state_id": "1",
+        "user_id": "1",
+      }
+    `);
+  });
 });

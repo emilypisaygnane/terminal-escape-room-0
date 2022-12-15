@@ -57,11 +57,12 @@
 const dotenv = require('dotenv');
 dotenv.config();
 const inquirer = require('inquirer');
-const userState = require('../lib/models/userState.js');
 const {
   fetchPromptById,
   fetchStateByAction,
   insertState,
+  deleteState,
+  fetchUserState,
 } = require('../lib/utils/fetch-utils.js');
 
 const start = async () => {
@@ -69,7 +70,7 @@ const start = async () => {
   console.log('Welcome to our game for the first time.');
   while (currentPrompt >= 0) {
     if (currentPrompt === 0) {
-      await userState.deleteUserState();
+      await deleteState();
       currentPrompt = 1;
     }
     const response = await fetchPromptById(currentPrompt);
@@ -93,7 +94,7 @@ const start = async () => {
       // Check if the chosen action has a state ID and insert it into the user_state table if not already present
       if (chosenAction.state_id !== null) {
         // Check if the item is already in the user's inventory
-        if (await userState.getById(chosenAction.state_id)) {
+        if (await fetchUserState(chosenAction.state_id)) {
           console.log('You already have this item in your inventory!!');
         } else {
           // Insert the item into the user's inventory
