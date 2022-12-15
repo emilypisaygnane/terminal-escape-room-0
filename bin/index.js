@@ -60,19 +60,17 @@ const inquirer = require('inquirer');
 const Prompt = require('../lib/models/Prompt.js');
 const actionState = require('../lib/models/actionState.js');
 const userState = require('../lib/models/userState.js');
+const { fetchPromptById } = require('../lib/utils/fetch-utils.js');
 
 const start = async () => {
-
-
-
   let currentPrompt = 0;
   console.log('Welcome to our game for the first time.');
   while (currentPrompt >= 0) {
-    if (currentPrompt === 0){
+    if (currentPrompt === 0) {
       await userState.deleteUserState();
       currentPrompt = 1;
     }
-    const response = await Prompt.getById(currentPrompt);
+    const response = await fetchPromptById(currentPrompt);
 
     const answers = await inquirer.prompt({
       prefix: '*',
