@@ -57,10 +57,11 @@
 const dotenv = require('dotenv');
 dotenv.config();
 const inquirer = require('inquirer');
-const Prompt = require('../lib/models/Prompt.js');
-const actionState = require('../lib/models/actionState.js');
 const userState = require('../lib/models/userState.js');
-const { fetchPromptById } = require('../lib/utils/fetch-utils.js');
+const {
+  fetchPromptById,
+  fetchStateByAction,
+} = require('../lib/utils/fetch-utils.js');
 
 const start = async () => {
   let currentPrompt = 0;
@@ -85,7 +86,7 @@ const start = async () => {
     const chosenAction = response.actions.find((action) => {
       return action.id === answers[`prompt ${response.id}`];
     });
-    const state = await actionState.checkActionState(chosenAction.id);
+    const state = await fetchStateByAction(chosenAction.id);
 
     if (state.actionCount === 0 || state.actionCount === state.stateCount) {
       // Check if the chosen action has a state ID and insert it into the user_state table if not already present
