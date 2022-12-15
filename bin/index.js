@@ -67,6 +67,7 @@ const {
 
 const start = async () => {
   let currentPrompt = 0;
+  console.clear();
   console.log('Welcome to our game for the first time.');
   while (currentPrompt >= 0) {
     if (currentPrompt === 0) {
@@ -76,7 +77,7 @@ const start = async () => {
     const response = await fetchPromptById(currentPrompt);
 
     const answers = await inquirer.prompt({
-      prefix: '*',
+      prefix: '',
       type: 'list',
       message: response.description,
       name: `prompt ${response.id}`,
@@ -108,7 +109,8 @@ const start = async () => {
       );
     }
 
-    console.log(currentPrompt);
+    // console.log(currentPrompt);
+    console.clear();
   }
 };
 start();
