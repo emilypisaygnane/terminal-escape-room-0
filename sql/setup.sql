@@ -1,4 +1,3 @@
--- Use this file to define your SQL tables
 -- The SQL in this file will be executed when you run `npm run setup-db`
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS prompts CASCADE;
@@ -91,7 +90,8 @@ VALUES
   (10, 'Next', 4, null),
   (11, 'Next', 13, null),
   (13, 'Next', 4, null),
-  (12, 'Play Again', 0, null);
+  (12, 'Exit', -1, null);
+
 
 CREATE TABLE action_state (
   action_id BIGINT,
