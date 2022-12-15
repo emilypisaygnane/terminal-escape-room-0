@@ -47,7 +47,6 @@ const start = async () => {
         // Check if the item is already in the user's inventory
         if (await fetchUserState(chosenAction.state_id)) {
           displayMessage = 'You already have this item in your inventory!!';
-          // console.log('You already have this item in your inventory!!');
         } else {
           // Insert the item into the user's inventory
           insertState(chosenAction.state_id);
@@ -55,9 +54,6 @@ const start = async () => {
       }
       currentPrompt = chosenAction.next_prompt_id;
     } else {
-      // console.log(
-      //   'Hmm, you can`t seem to do that yet. Maybe turn back and check around more?? :)'
-      // );
       displayMessage =
         'Hmm, you can`t seem to do that yet. Maybe turn back and check around more?? :)';
     }
