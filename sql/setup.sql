@@ -10,16 +10,14 @@ DROP TABLE IF EXISTS user_state CASCADE;
 
 CREATE TABLE users (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  email VARCHAR,
-  password_hash VARCHAR NOT NULL,
-  first_name VARCHAR NOT NULL,
-  last_name VARCHAR NOT NULL
+  username VARCHAR,
+  password_hash VARCHAR NOT NULL
 );
 
 INSERT INTO 
-  users (email, password_hash, first_name, last_name)
+  users (username, password_hash)
 VALUES
-  ('default', 'default', 'default', 'default');
+  ('default', 'default');
 
 CREATE TABLE prompts (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
