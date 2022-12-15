@@ -18,11 +18,10 @@ If you work on more than one feature at a time, you are guaranteed to multiply y
 
 ## User Routes
 
-| Route                    | HTTP Method | HTTP Body                                                                              | Description                                        |
-| ------------------------ | ----------- | -------------------------------------------------------------------------------------- | -------------------------------------------------- |
-| `/api/v1/users/`         | `POST`      | `{email: 'example@test.com', password: '123456', firstName: 'Test', lastName: 'User'}` | Creates new user                                   |
-| `api/v1/users/sessions/` | `POST`      | `{email: 'example@test.com', password: '123456'}`                                      | Signs in existing user                             |
-| `/api/v1/users/me/`      | `GET`       | None                                                                                   | Returns current user                               |
-| `/api/v1/users/`         | `GET`       | None                                                                                   | Authorized endpoint - returns all users for admin. |
-| `api/v1/users/sessions/` | `DELETE`    | None                                                                                   | Deletes a user session                             |
-
+| Route                    | HTTP Method | HTTP Body                                                                                 | Description                                        |
+| ------------------------ | ----------- | ----------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| `/api/v1/users/`         | `POST`      | `{username: 'example@test.com', password: '123456', firstName: 'Test', lastName: 'User'}` | Creates new user                                   |
+| `api/v1/users/sessions/` | `POST`      | `{username: 'example@test.com', password: '123456'}`                                      | Signs in existing user                             |
+| `/api/v1/users/me/`      | `GET`       | None                                                                                      | Returns current user                               |
+| `/api/v1/users/`         | `GET`       | None                                                                                      | Authorized endpoint - returns all users for admin. |
+| `api/v1/users/sessions/` | `DELETE`    | None                                                                                      | Deletes a user session                             |
