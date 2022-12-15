@@ -1,59 +1,3 @@
-#!/usr/bin/env node
-/* eslint-disable no-console */
-// const dotenv = require('dotenv');
-// dotenv.config();
-// const inquirer = require('inquirer');
-// const Prompt = require('../lib/models/Prompt.js');
-// const actionState = require('../lib/models/actionState.js');
-// const userState = require('../lib/models/userState.js');
-
-// const start = async () => {
-//   let currentPrompt = 1;
-//   while (currentPrompt) {
-//     const response = await Prompt.getById(currentPrompt);
-
-//     const answers = await inquirer.prompt({
-//       prefix: '*',
-//       type: 'list',
-//       message: response.description,
-//       name: `prompt ${response.id}`,
-//       choices: response.actions.map((action) => ({
-//         name: action.description,
-//         value: action.id,
-//       })),
-//     });
-//     const chosenAction = response.actions.find((action) => {
-//       return action.id === answers[`prompt ${response.id}`];
-//     });
-//     const state = await actionState.checkActionState(chosenAction.id);
-//     // const inventoryList = await userState.getAll();
-//     // console.log('inventoryList', inventoryList);
-//     // const inventory = inventoryList.map((item) => item.state_id);
-
-//     // console.log('inventory', inventory);
-
-//     if (state.actionCount === 0 || state.actionCount === state.stateCount) {
-//       // if (action.state_id not null)
-//       // if (chosenAction.state_id !== null && !inventory.includes(chosenAction.state_id)) {
-//       if (chosenAction.state_id !== null && ! (await userState.getById(chosenAction.state_id))) {
-//       // console.log('inserting into user_state:', chosenAction.state_id);
-//         //insert the state_id into the user_state table
-//         userState.insert(chosenAction.state_id);
-//       } else {
-//         console.log('You already have this item in your inventory!!');
-//       }
-//       currentPrompt = chosenAction.next_prompt_id;
-//     } else {
-//       console.log(
-//         'Hmm, you can`t seem to do that yet. Maybe turn back and check around more?? :)'
-//       );
-//     }
-
-//     console.log(currentPrompt);
-//   }
-// };
-// start();
-
 const dotenv = require('dotenv');
 dotenv.config();
 const inquirer = require('inquirer');
@@ -67,11 +11,15 @@ const {
 
 const start = async () => {
   let currentPrompt = 0;
+  let deathCount = 0;
   console.clear();
-  console.log('Welcome to our game for the first time.');
+  console.log(
+    'The Intergalactic Space Escape is an escape room game. As a player you have traveled into space in search of (something)... The ship has been badly hit by (something)... You get knocked out only to wake up to having to fight for your life.'
+  );
   while (currentPrompt >= 0) {
     if (currentPrompt === 0) {
       await deleteState();
+
       currentPrompt = 1;
     }
     const response = await fetchPromptById(currentPrompt);
@@ -108,8 +56,10 @@ const start = async () => {
         'Hmm, you can`t seem to do that yet. Maybe turn back and check around more?? :)'
       );
     }
-
-    // console.log(currentPrompt);
+    if (currentPrompt === 0) {
+      deathCount++;
+      console.log(`You have died ${deathCount} times.`);
+    }
     console.clear();
   }
 };
