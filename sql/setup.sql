@@ -87,10 +87,10 @@ VALUES
     'The adminstrators hyperpad, I wonder what priveleges this gives me?'
   ),
   (
-    'The bedroom has been destroyed, something or someone has been in here. You hear something behind you. It is a Crabtree Alien! The Alien reaches down and grabs you, hugging and crushing you from sheer force.'
+    'The bunkroom has been destroyed, something or someone has been in here. You hear something behind you. It is a Crabtree Alien! The Alien reaches down and grabs you, hugging and crushing you from sheer force.'
   ),
   (
-    '"The Crabtree Alien has killed you. What luck. GAME OVER SCRUB!"'
+    'The Crabtree Alien has killed you. What luck. GAME OVER SCRUB!'
   ),
   (
     'The pilots room is locked, but you can see the oxygen generator inside'
@@ -105,7 +105,7 @@ VALUES
     'The oxygen stabalizer has a blown tube on the spline reticulator'
   ),
   (
-    '*AI Voice* "Congratulations Captain, The Oxygen Stabalizer has been repaired. "You have escaped impending doom! Give yourself a pat on the back, because tomorrow will be full of new surpirses." YOU WIN! *AI Voice*'
+    '*AI Voice* "Congratulations Captain, The Oxygen Stabalizer has been repaired. You have escaped impending doom! Give yourself a pat on the back, because tomorrow will be full of new surpirses." *AI Voice*'
   ),
   (
     'You die the most lonliest of deaths, GAME OVER SCRUB!'
@@ -142,29 +142,29 @@ CREATE TABLE
 INSERT INTO
   actions (prompt_id, description, next_prompt_id, state_id)
 VALUES
-  (1, 'Examine window', 2, null),
-  (1, 'Examine desk', 3, null),
-  (1, 'Examine control panel', 4, null),
-  (1, 'Examine door', 5, null),
-  (2, 'Examine crack', 6, null),
-  (2, 'Go back', 1, null),
-  (3, 'Examine milk', 7, null),
-  (3, 'Examine key card', 8, null),
+  (1, 'Examine Window', 2, null),
+  (1, 'Examine Desk', 3, null),
+  (1, 'Examine Control Panel', 4, null),
+  (1, 'Examine Door', 5, null),
+  (2, 'Examine Crack', 6, null),
+  (2, 'Go Back', 1, null),
+  (3, 'Examine Milk', 7, null),
+  (3, 'Examine Key Card', 8, null),
   (3, 'Examine Grapple Hook', 9, null),
-  (3, 'Go back', 1, null),
-  (4, 'Pour milk on control panel', 10, null),
-  (4, 'Push big red button', 11, 4),
-  (4, 'Go back', 1, null),
-  (5, 'Use key card', 12, null),
-  (5, 'Go back', 1, null),
+  (3, 'Go Back', 1, null),
+  (4, 'Pour Milk on Control Panel', 10, null),
+  (4, 'Push Big Red Button', 11, 4),
+  (4, 'Go Back', 1, null),
+  (5, 'Use Key Card', 12, null),
+  (5, 'Go Back', 1, null),
   (6, 'Use Grapple Hook', 26, null),
   (6, 'Float off into space...', 0, null),
-  (7, 'Pick up milk', 3, 1),
-  (7, 'Go back', 3, null),
-  (8, 'Pick up key card', 3, 2),
-  (8, 'Go back', 3, null),
-  (9, 'Pick up Grapple Hook', 3, 3),
-  (9, 'Go back', 3, null),
+  (7, 'Pick Up Milk', 3, 1),
+  (7, 'Go Back', 3, null),
+  (8, 'Pick Up Key Card', 3, 2),
+  (8, 'Go Back', 3, null),
+  (9, 'Pick Up Grapple Hook', 3, 3),
+  (9, 'Go Back', 3, null),
   (10, 'Next', 4, null),
   (11, 'Next', 13, null),
   (13, 'Next', 4, null),
@@ -174,7 +174,7 @@ VALUES
   (14, 'Examine Bedroom', 18, null),
   (14, 'Examine Pilots Room', 20, null),
   (14, 'Go Back To First Room', 1, null),
-  (15, 'Examine large hosing tube', 16, null),
+  (15, 'Examine Large Hosing Tube', 16, null),
   (15, 'Examine Administrator Hyperpad', 17, null),
   (15, 'Go Back', 14, null),
   (16, 'Pickup Large Hosing Tube', 15, 4),
@@ -187,12 +187,12 @@ VALUES
   (20, 'Go Back', 14, null),
   (21, 'Next', 22, null),
   (22, 'Examine Oxygen Generator', 23, null),
-  (23, 'Use Large Hosing', 24, null),
+  (23, 'Use Large Hosing Tube', 24, null),
   (24, 'Next', -1, null),
   (25, 'Next', 0, null),
   (26, 'Next', 1, null);
 
---(12, 'Exit', -1, null);
+
 CREATE TABLE
   action_state (
     action_id BIGINT,
