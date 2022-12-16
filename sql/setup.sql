@@ -112,9 +112,15 @@ VALUES
   ),
   (
     'Whew! That was a close one, good thing we had batmans powers for a moment.'
+  ),
+  (
+    'You have succesfully accessed the room with the oxygen generator. You fix it, restoring the ship to habitable conditions, consider your duties complete. YOU WON!'
+  ),
+  (
+    'It sounds like the oxygen stabilizer is damaged in the next room, I should look around in case it needs fixing.'
   );
-
-CREATE TABLE
+  
+  CREATE TABLE
   state (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     description VARCHAR NOT NULL
@@ -191,7 +197,6 @@ VALUES
   (24, 'Next', -1, null),
   (25, 'Next', 0, null),
   (26, 'Next', 1, null);
-
 
 CREATE TABLE
   action_state (
