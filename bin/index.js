@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const dotenv = require('dotenv');
 dotenv.config();
 const inquirer = require('inquirer');
@@ -9,19 +10,31 @@ const {
   fetchUserState,
 } = require('../lib/utils/fetch-utils.js');
 
+const { ship, door, milk, keycard } = require('../lib/utils/ascii');
+// need to incorporate grapple and crabtree
+
 const start = async () => {
   let currentPrompt = 0;
   let deathCount = 0;
   let displayMessage = '';
   console.clear();
   console.log(
-    'The Intergalactic Space Escape is an escape room game. As a player you have traveled into space in search of (something)... The ship has been badly hit by (something)... You get knocked out only to wake up to having to fight for your life.'
+    'The Intergalactic Space Escape is an escape room game. As a player you have traveled into space in search of (something)... The ship has been badly hit by (something)... You get knocked out only to wake up to having to fight for your life.',
+    ship
   );
   while (currentPrompt >= 0) {
     if (currentPrompt === 0) {
       await deleteState();
       if (deathCount > 0) console.log(`You have died ${deathCount} times.`);
       currentPrompt = 1;
+    }
+    console.log(displayMessage);
+    if (currentPrompt === 7) {
+      console.log(milk);
+    } else if (currentPrompt === 12) {
+      console.log(door);
+    } else if (currentPrompt === 8) {
+      console.log(keycard);
     }
     const response = await fetchPromptById(currentPrompt);
 
@@ -67,4 +80,5 @@ const start = async () => {
   console.log(`You died ${deathCount} times.`);
   console.log('about the developers...');
 };
+
 start();
