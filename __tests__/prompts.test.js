@@ -18,28 +18,28 @@ describe('user routes', () => {
       Object {
         "actions": Array [
           Object {
-            "description": "Examine window",
+            "description": "Examine Window",
             "id": 1,
             "next_prompt_id": 2,
             "prompt_id": 1,
             "state_id": null,
           },
           Object {
-            "description": "Examine desk",
+            "description": "Examine Desk",
             "id": 2,
             "next_prompt_id": 3,
             "prompt_id": 1,
             "state_id": null,
           },
           Object {
-            "description": "Examine control panel",
+            "description": "Examine Control Panel",
             "id": 3,
             "next_prompt_id": 4,
             "prompt_id": 1,
             "state_id": null,
           },
           Object {
-            "description": "Examine door",
+            "description": "Examine Door",
             "id": 4,
             "next_prompt_id": 5,
             "prompt_id": 1,
