@@ -177,7 +177,7 @@ VALUES
   (12, 'Enter Room', 14, null),
   (12, 'Go Back', 1, null),
   (14, 'Examine Captains Locker', 15, null),
-  (14, 'Examine Bedroom', 18, null),
+  (14, 'Examine Bunkroom', 18, null),
   (14, 'Examine Pilots Room', 20, null),
   (14, 'Go Back To First Room', 1, null),
   (15, 'Examine Large Hosing Tube', 16, null),

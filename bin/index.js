@@ -9,9 +9,8 @@ const {
   deleteState,
   fetchUserState,
 } = require('../lib/utils/fetch-utils.js');
-
-const { ship, door, milk, keycard } = require('../lib/utils/ascii');
-// need to incorporate grapple and crabtree
+ 
+const { ship, door, milk, keycard, grapple, crabtree } = require('../lib/utils/ascii');
 
 const start = async () => {
   let currentPrompt = 0;
@@ -19,8 +18,7 @@ const start = async () => {
   let displayMessage = '';
   console.clear();
   console.log(
-    'The Intergalactic Space Escape is an escape room game. As a player you have traveled into space in search of (something)... The ship has been badly hit by (something)... You get knocked out only to wake up to having to fight for your life.',
-    ship
+    'The Intergalactic Space Escape is an escape room game. As a player you have traveled into space in search of (something)... The ship has been badly hit by (another thing)... You get knocked out only to wake up to having to fight for your life.', ship
   );
   while (currentPrompt >= 0) {
     if (currentPrompt === 0) {
@@ -28,13 +26,17 @@ const start = async () => {
       if (deathCount > 0) console.log(`You have died ${deathCount} times.`);
       currentPrompt = 1;
     }
-    console.log(displayMessage);
+
     if (currentPrompt === 7) {
       console.log(milk);
     } else if (currentPrompt === 12) {
       console.log(door);
     } else if (currentPrompt === 8) {
       console.log(keycard);
+    } else if (currentPrompt === 9) {
+      console.log(grapple);
+    } else if (currentPrompt === 19) {
+      console.log(crabtree);
     }
     const response = await fetchPromptById(currentPrompt);
 
@@ -76,9 +78,13 @@ const start = async () => {
     console.clear();
     console.log(displayMessage);
   }
-  console.log('Thank you for playing!');
   console.log(`You died ${deathCount} times.`);
-  console.log('about the developers...');
+  console.log('Thank you for playing!');
+  console.log(`Developed by
+  Erik Baxstrom: https://www.linkedin.com/in/erik-baxstrom/
+  Eddie Kuo: https://www.linkedin.com/in/eddie-kuo17/
+  Emily Pisaygnane: https://www.linkedin.com/in/emily-pisaygnane/
+  Tanner Richards: https://www.linkedin.com/in/tannerrichards/
+  `);
 };
-
 start();
