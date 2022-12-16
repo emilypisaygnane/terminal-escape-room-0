@@ -2,7 +2,7 @@
 
 ## Description
 
-The Intergalactic Space Escape is an escape room game. As a player you have traveled into space in search of (something)... The ship has been badly hit by (something)... You get knocked out only to wake up to having to fight for your life.
+The Intergalactic Space Escape is an escape room survival game starting off with the main character waking up, fully disoriented and on a mission to uncover/ escape the fate of the rest of the crew. It's up to you to navigate through the various rooms, interact with different pieces of equipment, and ultimately... DON'T DIE.
 
 # Install
 
@@ -14,7 +14,7 @@ npx
 
 ## About The Project
 
-This project was developed by using express and inquirer. Express was used to to create our database. The database stores the actions a player can make, along with what the player can use to move along in their escape from space. It also provides the prompts for the player so they can make choices and directs the player to the next prompt based on the choice they make for their survival.
+This game was developed by incorporating a series of technologies such as Express, PostgresSQL, and Inquirer NPM Package. Each of the prompts are linked to a series of actions to choose from. Upon choosing a specific action, the player is then led to another prompt with its corresponding set of actions and so on. Within the game, we also incorporated some barriers that rely on specific game conditions to be met in order for the player to achieve their desired goals.
 
 ## Meet The Team
 
