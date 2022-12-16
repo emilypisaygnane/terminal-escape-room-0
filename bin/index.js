@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const dotenv = require('dotenv');
 dotenv.config();
 const inquirer = require('inquirer');
@@ -9,7 +10,8 @@ const {
   fetchUserState,
 } = require('../lib/utils/fetch-utils.js');
 
-const { ship, grapple, door, milk, keycard } = require('../lib/utils/ascii');
+const { ship, door, milk, keycard } = require('../lib/utils/ascii');
+// need to incorporate grapple and crabtree
 
 const start = async () => {
   let currentPrompt = 0;
